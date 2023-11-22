@@ -1,79 +1,106 @@
 #!/usr/bin/python3
-''' Module for the Square definition'''
+"""Square class defined by size and position"""
 
 
 class Square:
-    ''' Defines a new square '''
+    """ Square class defined
+        Attributes:
+            size (int): Size of square
+            position (tuple): position of space and new lines
+    """
     def __init__(self, size=0, position=(0, 0)):
-        ''' Constructor.
+        """initializes
         Args:
-            size(int): width and height of the Square
-            position(int, int): position of the square created
-        '''
-        if isinstance(size, int):
-            self.__size = size
-        else:
-            raise TypeError("size must be an integer")
-        if size < 0:
-            raise ValueError("size must be >= 0")
-        if isinstance(position, tuple):
-            self.__position = position
-        else:
-            raise TypeError("position must be a tuple of 2 positive integers")
+            size (int): size
+            postion(tuple): postion
+        Returns:
+            None
+        """
+
+        self.size = size
+        self.position = position
 
     @property
     def size(self):
-        ''' Retrieves the private instance attribute size '''
+        """
+        getter of size
+        Return:
+            Size of square
+        """
         return self.__size
 
     @size.setter
     def size(self, value):
-        ''' Sets the Size attribute.
+        """
+        Setter of size
         Args:
-            value:size of new value of the square
-        '''
-        if not isinstance(value, int):
+            value (int): size
+        Raises
+            TypeError: if size is not int
+            ValueError: size less than 0
+        Returns:
+            None
+        """
+        if type(value) != int:
             raise TypeError("size must be an integer")
-        if value < 0:
+        elif value < 0:
             raise ValueError("size must be >= 0")
-        self.__size = value
+        else:
+            self.__size = value
 
     @property
     def position(self):
-        ''' Retrieves the position of the square '''
+        """
+        get postion attribute
+        """
         return self.__position
 
     @position.setter
     def position(self, value):
-        ''' Sets the Positin attribute.
+        """
+            setter of position
         Args:
-            value: new value as a tuple with 2 elements
-        '''
-        ptn1 = self.__value[0]
-        ptn2 = self.__value[1]
-        lg = len(value)
-        if isinstance(value, tuple) and ptn1 > 0 and ptn2 > 0 and lg == 2:
-            self.__position = value
-        else:
+            value (tuple): position of the square in 2D space
+        Returns:
+            None
+        """
+        if len(value) != 2 or type(value) != tuple:
             raise TypeError("position must be a tuple of 2 positive integers")
-
-    # moved area to after setter so that it uses updated values
+        if type(value[0]) != int or value[0] < 0:
+            raise TypeError("position must be a tuple of 2 positive integers")
+        if type(value[1]) != int or value[1] < 0:
+            raise TypeError("position must be a tuple of 2 positive integers")
+        self.__position = value
 
     def area(self):
-        ''' Calculates the area of Object Square.
+        """
+        get area
         Return:
-            the current square area
-        '''
-        return (self.__size * self.__size)
+            area (int)
+        """
+        return self.__size ** 2
 
     def my_print(self):
-        ''' Prints in Stdout the square with the character # '''
-        if self.__size == 0:
+        """
+        print a square
+        Returns:
+            None
+        """
+        if self.size == 0:
             print()
         else:
+            print('\n'*self.__position[1], end='')
             for i in range(self.__size):
-                for k in range(0, self.__position[0]):
-                    print(" ", end="")
-                for j in range(1, self.__size):
-                    print("#", end="")
-                print("#")
+                print(' '*self.__position[0], end='')
+                print('#'*self.__size)
+
+    def __str__(self):
+        """
+        defining printing behavior of the class
+        """
+        if self.__size == 0:
+            return ''
+        new_lines = '\n' * self.position[1]
+        spaces = ' ' * self.position[0]
+        hashes = '#' * self.size
+        return new_lines + '\n'.join(spaces + hashes for e in range(self.size))
