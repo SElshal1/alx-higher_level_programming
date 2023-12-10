@@ -1,9 +1,11 @@
 #!/usr/bin/python3
-"""Module that defines a class with a method that prints a sorted list"""
-
 
 class MyList(list):
-    """Class representing MyList"""
+
+
+    """Implements sorted printing for the built-in list class"""
+
     def print_sorted(self):
-        """Prints a list sorted in ascending order"""
-        print(sorted(self))
+        """Print the list in ascending order."""
+        sorted_list = sorted(self)
+        print(f"The sorted list is: {sorted_list}")
