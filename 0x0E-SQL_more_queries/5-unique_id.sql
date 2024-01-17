@@ -1,3 +1,3 @@
--- creates the table unique_id on your MySQL server
--- creates a table
+--CREATE db TB unique_id 
+-- CREATE db TB
 CREATE TABLE IF NOT EXISTS unique_id (id INT DEFAULT 1 UNIQUE, name VARCHAR(256));
