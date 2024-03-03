@@ -1,3 +1,3 @@
 #!/bin/bash
-# Bash script that takes in a URL as an argument
-curl "$1" -sX GET -H "You got me!"
+# takes in a URL, sends a POST
+curl "$1" -sX POST -d "You got me!"
