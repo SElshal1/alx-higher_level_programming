@@ -1,3 +1,10 @@
 #!/bin/bash
-# Bash script that takes in a URL as an argument
-curl "$1" -sX GET -H "X-HolbertonSchool-User-Id:98"
+
+# Check if the URL argument is provided
+if [ -z "$1" ]; then
+    echo "Usage: $0 <URL>"
+    exit 1
+fi
+
+# Send a GET request with curl, including the X-School-User-Id header
+curl -s -H "X-School-User-Id: 98" "$1"
